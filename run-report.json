@@ -1,0 +1,150 @@
+{
+  "config": "c3",
+  "model": "deepseek/deepseek-v4.1-flash-1017",
+  "sampling": {
+    "temperature": null,
+    "topP": null,
+    "seed": null,
+    "maxTokens": null
+  },
+  "provider": {
+    "order": [
+      "DeepInfra"
+    ],
+    "allowFallbacks": false
+  },
+  "modelTimeoutMs": 600000,
+  "modelRetries": 8,
+  "task": {
+    "source": "spec",
+    "path": "experiment/SPEC.md",
+    "sha256": "473c476e479cdc5f9cdfe9ba0a7130645648cbad69e7aa87ba62185fce72e23c",
+    "specSha256": "859a8fa41a7b8e60e8aaad783b88f78600e771d9fe29bb0f5c0a71d8a38c41f1",
+    "agentsSha256": "086b94e11ccf3fd2855f2f4eb8d88bfe0efb8fce140e6eb2e83ef415c8dafade"
+  },
+  "harnessGitSha": "316ef48d5ca2059e67b9da6fffc45c61124166e1",
+  "harnessGitDirty": false,
+  "startedAt": "2026-11-08T05:27:12.739Z",
+  "finishedAt": "2026-11-08T09:22:41.237Z",
+  "durationMs": 14128498,
+  "status": "SUCCESS",
+  "usage": {
+    "promptTokens": 53102106,
+    "completionTokens": 1837437,
+    "totalTokens": 54939543,
+    "calls": 1060,
+    "retries": 0,
+    "cost": 0.8026854012799991,
+    "modelsUsed": [
+      "deepseek/deepseek-v4.1-flash-1017"
+    ],
+    "providersUsed": {
+      "DeepInfra": 1060
+    }
+  },
+  "budget": {
+    "maxCostUsd": 6,
+    "exhausted": false,
+    "costReported": true
+  },
+  "turns": 0,
+  "harnessConfig": {
+    "path": "/home/andres/Documents/harness/experiment/harness-config.json",
+    "sha256": "3e9ba823ac1f8f2184accbda1cde8244727de2267eba33a11f12ca87a726598f",
+    "mcpServers": [],
+    "toolNames": [
+      "load_skill"
+    ],
+    "skillNames": [
+      "api-design",
+      "api-security-auth-pattern",
+      "caveman",
+      "database-migrations",
+      "docker-patterns",
+      "e2e-testing",
+      "error-handling",
+      "nestjs-best-practices",
+      "nestjs-patterns",
+      "ponytail",
+      "postgres-patterns",
+      "react-patterns",
+      "react-testing"
+    ]
+  },
+  "steps": 8,
+  "totalLoopTurns": 14,
+  "decision": {
+    "action": "FINISH",
+    "reason": "reviewer accepted the system"
+  },
+  "trace": [
+    {
+      "step": 1,
+      "nodeId": "architect",
+      "loopStatus": "SUCCESS",
+      "decision": "NEXT",
+      "nextNode": "data"
+    },
+    {
+      "step": 2,
+      "nodeId": "data",
+      "loopStatus": "SUCCESS",
+      "decision": "NEXT",
+      "nextNode": "backend"
+    },
+    {
+      "step": 3,
+      "nodeId": "backend",
+      "loopStatus": "SUCCESS",
+      "decision": "NEXT",
+      "nextNode": "frontend"
+    },
+    {
+      "step": 4,
+      "nodeId": "frontend",
+      "loopStatus": "SUCCESS",
+      "decision": "NEXT",
+      "nextNode": "reviewer"
+    },
+    {
+      "step": 5,
+      "nodeId": "reviewer",
+      "loopStatus": "SUCCESS",
+      "decision": "NEXT",
+      "nextNode": "backend"
+    },
+    {
+      "step": 6,
+      "nodeId": "backend",
+      "loopStatus": "SUCCESS",
+      "decision": "NEXT",
+      "nextNode": "frontend"
+    },
+    {
+      "step": 7,
+      "nodeId": "frontend",
+      "loopStatus": "SUCCESS",
+      "decision": "NEXT",
+      "nextNode": "reviewer"
+    },
+    {
+      "step": 8,
+      "nodeId": "reviewer",
+      "loopStatus": "SUCCESS",
+      "decision": "FINISH"
+    }
+  ],
+  "batteryPhase": {
+    "ran": true,
+    "cleanup": {
+      "killedProcesses": [],
+      "removedContainers": []
+    },
+    "stack": {
+      "up": true,
+      "healthy": true
+    },
+    "passed": false
+  },
+  "stopReason": "finished"
+}

@@ -1,0 +1,260 @@
+{
+  "timestamp": "2026-11-08T09:22:39.608Z",
+  "batteries": [
+    {
+      "battery": "battery1-e2e",
+      "passed": false,
+      "checks": [
+        {
+          "name": "flows.spec.ts > login per role > login patient shows correct nav",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "flows.spec.ts > login per role > login professional shows correct nav",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "flows.spec.ts > login per role > login staff shows correct nav",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "flows.spec.ts > login per role > login admin shows correct nav",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "flows.spec.ts > patient flow > search, book, assert appointment appears",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "flows.spec.ts > professional flow > record encounter",
+          "passed": false,
+          "details": "[\"\\u001b[31mTest timeout of 150000ms exceeded.\\u001b[39m\"]"
+        },
+        {
+          "name": "flows.spec.ts > patient history > history contains encounter",
+          "passed": false,
+          "details": "[\"Error: \\u001b[2mexpect(\\u001b[22m\\u001b[31mreceived\\u001b[39m\\u001b[2m).\\u001b[22mtoContain\\u001b[2m(\\u001b[22m\\u001b[32mexpected\\u001b[39m\\u001b[2m) // indexOf\\u001b[22m\\n\\nExpected substring: \\u001b[32m\\\"Diagnóstico de prueba\\\"\\u001b[39m\\nReceived string:    \\u001b[31m\\\"Sun, Nov 08, 2026, 03:41 AMElena Gómez · Medicina GeneralVersion 2CorrecciónDiagnosis: Diag2Sun, Nov 08, 2026, 03:41 AMElena Gómez · Medicina GeneralVersion 1NotaDiagnosis: Diagpasswd.pdf 10 B · Sun, Nov 08, 2026, 03:41 AMSun, Nov 08, 2026, 03:39 AMElena Gómez · Medicina GeneralVersion 1Paciente refiere cefaleaDiagnosis: Migrañainforme.pdf 13 B · Sun, Nov 08, 2026, 03:39 AMSun, Nov 08, 2026, 03:37 AMElena Gómez · Medicina GeneralVersion 2v2Diagnosis: d2Sun, Nov 08, 2026, 03:37 AMElena Gómez · Medicina GeneralVersion 1v1Diagnosis: d1Sun, Nov 08, 2026, 03:33 AMElena Gómez · Medicina GeneralVersion 1Headache for three daysDiagnosis: Tension headache\\\"\\u001b[39m\"]"
+        },
+        {
+          "name": "flows.spec.ts > patient cancel > cancel appointment removes it",
+          "passed": false,
+          "details": "[\"Error: \\u001b[2mexpect(\\u001b[22m\\u001b[31mlocator\\u001b[39m\\u001b[2m).\\u001b[22mtoHaveCount\\u001b[2m(\\u001b[22m\\u001b[32mexpected\\u001b[39m\\u001b[2m)\\u001b[22m failed\\n\\nLocator:  locator('[data-appointment-id=\\\"10\\\"]')\\nExpected: \\u001b[32m0\\u001b[39m\\nReceived: \\u001b[31m1\\u001b[39m\\nTimeout:  10000ms\\n\\nCall log:\\n\\u001b[2m  - Expect \\\"toHaveCount\\\" locator('[data-appointment-id=\\\"10\\\"]') with timeout 10000ms\\u001b[22m\\n\\u001b[2m  - waiting for locator('[data-appointment-id=\\\"10\\\"]')\\u001b[22m\\n\\u001b[2m    24 × locator resolved to 1 element\\u001b[22m\\n\\u001b[2m       - unexpected value \\\"1\\\"\\u001b[22m\\n\"]"
+        }
+      ],
+      "summary": {
+        "total": 8,
+        "passed": 5,
+        "failed": 3
+      }
+    },
+    {
+      "battery": "battery2-schema",
+      "passed": true,
+      "checks": [
+        {
+          "name": "table-usuario",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "table-rol",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "table-paciente",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "table-profesional",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "table-disponibilidad",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "table-cita",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "table-encuentro",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "table-adjunto",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "table-auditoria",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "fk-cita-paciente_id",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "fk-cita-profesional_id",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "fk-encuentro-cita_id",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "fk-adjunto-encuentro_id",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "fk-auditoria-usuario_id",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "notnull-cita.paciente_id",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "notnull-cita.profesional_id",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "notnull-cita.franja_inicio",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "notnull-cita.estado",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "notnull-encuentro.version",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "partial-unique-cita-professional-slot",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "check-cita-estado",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "check-encuentro-version",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "index-cita-franja_inicio",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "index-cita-paciente_id",
+          "passed": true,
+          "details": ""
+        }
+      ],
+      "summary": {
+        "total": 24,
+        "passed": 24,
+        "failed": 0
+      }
+    },
+    {
+      "battery": "battery3-abuse",
+      "passed": false,
+      "checks": [
+        {
+          "name": "patient-cannot-list-admin-users",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "staff-cannot-read-clinical-history",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "patient-cannot-read-other-patient-history",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "professional-cannot-read-unassigned-patient-history",
+          "passed": false,
+          "details": "expected 403 got 200: {\"patientId\":3,\"encounters\":[{\"id\":13,\"appointmentId\":19,\"version\":1,\"notes\":\"Review note text\",\"diagnosis\":\"Review diagnosis\",\"authorProfessionalId\":1,\"replacesId\":null,\"createdAt\":\"2026-11-08T09:08:"
+        },
+        {
+          "name": "patient-cannot-delete-others-appointment",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "no-token-returns-401",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "undeclared-field-rejected-422",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "double-booking-one-201-one-409",
+          "passed": true,
+          "details": ""
+        }
+      ],
+      "summary": {
+        "total": 8,
+        "passed": 7,
+        "failed": 1
+      }
+    },
+    {
+      "battery": "battery4-coherence",
+      "passed": true,
+      "checks": [
+        {
+          "name": "unfulfilled-contracts",
+          "passed": true,
+          "details": ""
+        },
+        {
+          "name": "exposed-not-invoked",
+          "passed": true,
+          "details": "informational count=10"
+        }
+      ],
+      "summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      }
+    }
+  ],
+  "passed": false
+}

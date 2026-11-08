@@ -1,0 +1,6 @@
+{"decision":"allowed","reason":"Tool 'read_file' is allowed by policy","tool":"read_file","path":"SPEC.md","at":"2026-11-08T05:27:13.729Z"}
+{"decision":"allowed","reason":"Command 'wc' is allowed by policy","tool":"run_command","command":"wc -l SPEC.md && sed -n '1,120p' SPEC.md","at":"2026-11-08T05:27:14.706Z"}
+{"decision":"allowed","reason":"Command 'sed' is allowed by policy","tool":"run_command","command":"sed -n '120,190p' SPEC.md","at":"2026-11-08T05:27:15.332Z"}
+{"decision":"allowed","reason":"Command 'ls' is allowed by policy","tool":"run_command","command":"ls -la && ls docs 2>/dev/null","at":"2026-11-08T05:27:16.103Z"}
+{"decision":"allowed","reason":"Tool 'write_file' is allowed by policy","tool":"write_file","path":"docs/architecture.md","at":"2026-11-08T05:27:53.062Z"}
+{"decision":"allowed","reason":"Command 'test' is allowed by policy","tool":"run_command","command":"test -f docs/architecture.md && echo OK && wc -l docs/architecture.md","at":"2026-11-08T05:27:53.948Z"}

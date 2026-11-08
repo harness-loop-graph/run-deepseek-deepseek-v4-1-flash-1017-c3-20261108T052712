@@ -1,0 +1,114 @@
+# Medical Appointments & Clinical History — local stack (RF-27).
+#
+#   docker compose up -d --build
+#
+# Ports (fixed by SPEC.md): db 5432, backend 3000, frontend 8080.
+# Every value below has a documented default in `.env.example`; copy it to
+# `.env` to override anything. No secret is committed to the repository.
+name: medapp
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: medapp-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-medapp}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-medapp}
+      POSTGRES_DB: ${POSTGRES_DB:-medapp}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} -h 127.0.0.1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    networks:
+      - medapp
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: medapp-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      PORT: 3000
+      # Canonical connection string (backend also accepts PGHOST/PGUSER/...).
+      DATABASE_URL: postgres://${POSTGRES_USER:-medapp}:${POSTGRES_PASSWORD:-medapp}@db:5432/${POSTGRES_DB:-medapp}
+      PGHOST: db
+      PGPORT: 5432
+      PGUSER: ${POSTGRES_USER:-medapp}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-medapp}
+      PGDATABASE: ${POSTGRES_DB:-medapp}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: ${POSTGRES_USER:-medapp}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-medapp}
+      POSTGRES_DB: ${POSTGRES_DB:-medapp}
+      DATABASE_SSL: "false"
+      DATABASE_POOL_MAX: ${DATABASE_POOL_MAX:-10}
+      # Deterministic seed (RF-05). Override in `.env`, never commit a value.
+      SEED_PASSWORD: ${SEED_PASSWORD:-Seed!Passw0rd}
+      # OAuth 2.0 PKCE client fixed by the specification.
+      OAUTH_CLIENT_ID: ${OAUTH_CLIENT_ID:-medapp-spa}
+      OAUTH_REDIRECT_URI: ${OAUTH_REDIRECT_URI:-http://localhost:8080/auth/callback}
+      ACCESS_TOKEN_TTL_SECONDS: ${ACCESS_TOKEN_TTL_SECONDS:-900}
+      REFRESH_TOKEN_TTL_SECONDS: ${REFRESH_TOKEN_TTL_SECONDS:-28800}
+      TOKEN_SECRET: ${TOKEN_SECRET:-local-development-token-secret-change-me}
+      # Attachments (RF-17): stored on the backend volume, never served directly.
+      ATTACHMENTS_DIR: /app/storage/attachments
+      MAX_UPLOAD_BYTES: ${MAX_UPLOAD_BYTES:-5242880}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:8080}
+      RATE_LIMIT_AUTH_PER_MINUTE: ${RATE_LIMIT_AUTH_PER_MINUTE:-5}
+      RATE_LIMIT_BOOKING_PER_MINUTE: ${RATE_LIMIT_BOOKING_PER_MINUTE:-10}
+    ports:
+      - "3000:3000"
+    volumes:
+      - attachments-data:/app/storage
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "node -e \"fetch('http://127.0.0.1:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\"",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    networks:
+      - medapp
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:3000}
+        VITE_OAUTH_CLIENT_ID: ${OAUTH_CLIENT_ID:-medapp-spa}
+        VITE_OAUTH_REDIRECT_URI: ${OAUTH_REDIRECT_URI:-http://localhost:8080/auth/callback}
+    container_name: medapp-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    networks:
+      - medapp
+
+volumes:
+  db-data:
+  attachments-data:
+
+networks:
+  medapp:
+    driver: bridge
