@@ -146,5 +146,19 @@
     },
     "passed": false
   },
-  "stopReason": "finished"
+  "stopReason": "finished",
+  "staticAnalysis": {
+    "sonarOrganization": "harness-loop-graph",
+    "sonarProjectKey": "harness-loop-graph_run-deepseek-deepseek-v4-1-flash-1017-c3-20261108T052712",
+    "semgrepConfig": [
+      "p/default",
+      "p/typescript"
+    ],
+    "workflowSha256": "18444a670b4d0f149c2766d942debfbd65ca456f5a8886947a6ae2364a6734d8",
+    "removedWorkflows": []
+  },
+  "repository": {
+    "name": "harness-loop-graph/run-deepseek-deepseek-v4-1-flash-1017-c3-20261108T052712",
+    "url": "https://github.com/harness-loop-graph/run-deepseek-deepseek-v4-1-flash-1017-c3-20261108T052712"
+  }
 }
